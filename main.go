@@ -31,7 +31,7 @@ Run '{{.Name}} COMMAND --help' for more information on a command.
 
 var CommandHelpTemplate = `{{.Usage}}
 {{if .Description}}{{.Description}}{{end}}
-Usage: 
+Usage:
 	{{.HelpName}} {{if .Flags}}[OPTIONS] {{end}}{{if ne "None" .ArgsUsage}}{{if ne "" .ArgsUsage}}{{.ArgsUsage}}{{else}}[arg...]{{end}}{{end}}
 
 {{if .Flags}}Options:{{range .Flags}}
@@ -64,6 +64,7 @@ func mainErr() error {
 	cli.SubcommandHelpTemplate = SubcommandHelpTemplate
 
 	app := cli.NewApp()
+	app.EnableBashCompletion = true
 	app.Name = "rancher"
 	app.Usage = "Rancher CLI, managing containers one UTF-8 character at a time"
 	app.Before = func(ctx *cli.Context) error {
